@@ -1,0 +1,19 @@
+{
+  "name": "server.raumgang",
+  "version": "1.0.0",
+  "description": "Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calinvlad/App.git"
+  },
+  "author": "AforC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/calinvlad/App/issues"
+  },
+  "homepage": "https://github.com/calinvlad/App#readme"
+}
