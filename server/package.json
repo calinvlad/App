@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/calinvlad/App/issues"
   },
-  "homepage": "https://github.com/calinvlad/App#readme"
+  "homepage": "https://github.com/calinvlad/App#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
