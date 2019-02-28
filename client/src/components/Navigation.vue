@@ -17,6 +17,10 @@
       v-if="!$store.state.isUserLoggedIn">
       Login</v-btn>
       <v-btn flat
+      :to="{name: 'scan', params: {UserId: $store.state.user.id}}"
+      v-if="$store.state.isUserLoggedIn">
+      Scan</v-btn>
+      <v-btn flat
       @click="logout"
       v-if="$store.state.isUserLoggedIn">
       Logout</v-btn>

@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Register from './components/User/Register'
 import Login from './components/User/Login'
+import Scan from './components/Scan/Scan'
+import CreateScan from './components/Scan/CreateScan'
+
 Vue.use(Router)
 
 export default new Router({
@@ -29,5 +32,15 @@ export default new Router({
       name: 'login',
       component: Login
     },
+    {
+      path: '/:UserId/scans',
+      name: 'scan',
+      component: Scan
+    },
+    {
+      path: '/:UserId/scans/create',
+      name: 'createscan',
+      component: CreateScan
+    }
   ]
 })

@@ -40,7 +40,8 @@ export default {
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
         this.$router.push({
-          name: 'home'
+          name: 'scan',
+          params: { UserId: this.$store.state.user.id }
         })
       } catch (error) {
         this.error = error.response.data.error

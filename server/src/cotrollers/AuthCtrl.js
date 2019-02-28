@@ -1,4 +1,4 @@
-const {User} = require('../../models')
+const {User, Scan} = require('../../models')
 const jwt = require('jsonwebtoken')
 const configuration = require('../../config/configuration')
 
@@ -10,6 +10,21 @@ function jwtSignUser (user) {
 }
 
 module.exports = {
+  async index(req, res) {
+    try {
+      const users = await User.findAll({
+        include: [{
+          model: Scan
+        }]
+      })
+      res.send(users)
+    }
+    catch(error) {
+      res.statut(400).send({
+        error: 'Something is wrong with the server. If the problem persists, contact us.'
+      })
+    }
+  },
   async register (req, res) {
     try {
       const user = await User.create(req.body)
