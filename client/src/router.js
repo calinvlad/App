@@ -5,6 +5,7 @@ import Register from './components/User/Register'
 import Login from './components/User/Login'
 import Scan from './components/Scan/Scan'
 import CreateScan from './components/Scan/CreateScan'
+import EditScan from './components/Scan/EditScan'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/:UserId/scans/create',
       name: 'createscan',
       component: CreateScan
+    },
+    {
+      path: '/:UserId/scans/:ScanId/edit',
+      name: 'editscan',
+      component: EditScan
     }
   ]
 })

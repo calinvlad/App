@@ -11,3 +11,7 @@
 
 # Create a post scan by user
 Done
+
+### Edit Scan
+# Get User's scan
+# Edit User's scan

@@ -26,4 +26,17 @@ module.exports = (app) => {
   app.post('/scans/:UserId',
     isAuthenticated,
     ScanCtrl.post)
-}
+
+  // Get User's Scan by id
+  app.get('/scans/:UserId/:ScanId',
+    ScanCtrl.getById)
+
+  //Update User's Scan Data
+  app.put('/scans/:UserId/:ScanId',
+    isAuthenticated,
+    ScanCtrl.update)
+  
+  app.delete('/scans/:UserId/:ScanId',
+    isAuthenticated,
+    ScanCtrl.delete)
+} 

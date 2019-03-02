@@ -14,9 +14,15 @@
         <div class="danger-alert mt-2 mb-2" v-html="error">
           {{ error }}
         </div>
+        <div class="error" v-html="error"></div>
         <v-btn
-        @click="create"
+        @click="update"
         >Submit</v-btn>
+        <v-btn
+        class="red"
+        @click="destroy"
+        >Delete
+        </v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -45,7 +51,7 @@ export default {
     ])
   },
   methods: {
-    async create () {
+    async update () {
       this.error = null
       const areAllFieldsFilledIn = Object
         .keys(this.scan)
@@ -55,20 +61,57 @@ export default {
         return
       }
       try {
-        const UserId = this.user.id
-
-        this.scan = (await ScanService.post({
-          scan_name: this.scan.scan_name,
-          scan_link: this.scan.scan_link,
-          UserId: UserId
-        })).data
+        const ScanId = this.scan.id
+        // const UserId = this.user.id
+        if (this.scan.UserId && this.user.id) {
+          await ScanService.update(this.scan, {
+            ScanId: ScanId
+          })
+          this.$router.push({
+            name: 'scan',
+            params: {
+              UserId: this.user.id
+            }
+          })
+        } else {
+          this.error('No permission for you. Please log in.')
+        }
+      } catch (error) {
+        this.error = error.response.data.error
+      }
+    },
+    async destroy () {
+      try {
+        const UserId = this.scan.UserId
+        const ScanId = this.scan.id
+        await ScanService.destroy({
+          UserId: UserId,
+          id: ScanId
+        })
         this.$router.push({
-          name: 'scan'
+          name: 'scan',
+          params: {
+            UserId: this.user.id
+          }
         })
       } catch (error) {
         this.error = error.response.data.error
       }
     }
+  },
+  async mounted () {
+    try {
+      const ScanId = this.$store.state.route.params.ScanId
+      const UserId = this.user.id
+      this.scan = (await ScanService.getById(UserId, ScanId)).data
+      // console.log(song)
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 </script>
+
+<style>
+
+</style>

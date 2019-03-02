@@ -34,6 +34,24 @@ module.exports = {
       })
     }
   },
+  async getById(req, res) {
+    try {
+      const UserId = req.params.UserId
+      const ScanId = req.params.ScanId
+      const scan = await Scan.findOne({
+        where: {
+          UserId: UserId,
+          id: ScanId
+        }
+      })
+      res.send(scan)
+    }
+    catch(error) {
+      res.status(404).send({
+        error: 'Scan not found'
+      })
+    }
+  },
   async post(req, res) {
     try {
       const UserId = req.params.UserId
@@ -49,6 +67,52 @@ module.exports = {
     catch(error) {
       res.status(400).send({
         error: 'You do not have permission to do that'
+      })
+    }
+  },
+  async update(req, res) {
+    try {
+      const UserId = req.params.UserId
+      const ScanId = req.params.ScanId
+      await Scan.update(req.body, {
+        where: {
+          id: ScanId,
+          UserId: UserId
+        }
+      })
+      res.send(req.body)
+    }
+    catch (error) {
+      res.status(400).send({
+        error: 'You are not allowed to post this scan'
+      })
+    }
+  },
+  async delete (req, res) {
+    try {
+      const UserId = req.params.UserId
+      const ScanId = req.params.ScanId
+      console.log('USERID: ', UserId)
+      console.log('ScanId: ', ScanId)
+      const scan = await Scan.findOne({
+        where: {
+          UserId: UserId,
+          id: ScanId
+        }
+      })
+      if(!scan) {
+        res.status(403).send({
+          error: 'You do not have permission to do that.'
+        })
+      }
+      else {
+        await scan.destroy()
+        res.send(scan)
+      }
+    }
+    catch(error) {
+      res.status(400).send({
+        error: 'Something went wrong while deleting the scan.'
       })
     }
   }
