@@ -1,13 +1,12 @@
 const Sequelize = require('sequelize')
-const {Scan, User} = require('../../models')
+const {Scan, User, Room} = require('../../models')
 
 module.exports = {
   async index(req, res) {
     try {
-      const scans = await Scan.findAll(req.params, {
+      const scans = await Scan.findAll({
         include: [{
-          model: User,
-          as: 'UserId'
+          model: Room
         }]
       })
       res.send(scans)
@@ -24,7 +23,10 @@ module.exports = {
       const scan = await Scan.findAll({
         where: {
           UserId: UserId
-        }
+        },
+        include: [{
+          model: Room
+        }]
       })
       res.send(scan)
     }
@@ -42,7 +44,10 @@ module.exports = {
         where: {
           UserId: UserId,
           id: ScanId
-        }
+        },
+        include: [{
+          model: Room
+        }]
       })
       res.send(scan)
     }

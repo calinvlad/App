@@ -5,13 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     scan_link: DataTypes.STRING
   }, {});
   Scan.associate = function(models) {
-    // associations can be defined here
     Scan.belongsTo(models.User, {
       foreignKey: {
         field: 'UserId',
         allowNull: false
       }
     })
+    Scan.hasMany(models.Room)
   };
   return Scan;
 };

@@ -5,13 +5,14 @@
 const {
   sequelize,
   User,
-  Scan
+  Scan,
+  Room
 } = require('../models')
 
 const Promise = require('bluebird')
 const scans = require('./scans.json')
 const users = require('./users.json')
-
+const rooms = require('./rooms.json')
 sequelize.sync({force: true}) 
   .then(async function () {
     await Promise.all(
@@ -23,6 +24,12 @@ sequelize.sync({force: true})
     await Promise.all(
       scans.map(scan => {
         Scan.create(scan)
+      })
+    )
+
+    await Promise.all(
+      rooms.map(room => {
+        Room.create(room)
       })
     )
   })

@@ -2,18 +2,19 @@
   <v-layout>
     <v-flex xs6 offset-xs3>
         <v-text-field
-        label="Scan Name*"
+        label="Room Name*"
         :rules="[rules.required]"
-        v-model="scan.scan_name">
+        v-model="room.room_name">
         </v-text-field>
         <v-text-field
-        label="Scan Link*"
+        label="Room Link*"
         :rules="[rules.required]"
-        v-model="scan.scan_link">
+        v-model="room.room_link">
         </v-text-field>
         <div class="danger-alert mt-2 mb-2" v-html="error">
           {{ error }}
         </div>
+        <div class="error" v-html="error"></div>
         <v-btn
         @click="update"
         >Submit</v-btn>
@@ -28,14 +29,14 @@
 
 <script>
 import { mapState } from 'vuex'
-import ScanService from '@/services/ScanService'
+import RoomService from '@/services/RoomService'
 
 export default {
   data () {
     return {
-      scan: {
-        scan_name: null,
-        scan_link: null
+      room: {
+        room_name: null,
+        room_link: null
       },
       rules: {
         required: (value) => !!value || 'required'
@@ -46,25 +47,28 @@ export default {
   computed: {
     ...mapState([
       'isUserLoggedIn',
-      'user'
+      'user',
+      'route'
     ])
   },
   methods: {
     async update () {
       this.error = null
       const areAllFieldsFilledIn = Object
-        .keys(this.scan)
-        .every(key => !!this.scan[key])
+        .keys(this.room)
+        .every(key => !!this.room[key])
       if (!areAllFieldsFilledIn) {
         this.error = 'Please fill in all the required fields.'
         return
       }
       try {
-        const ScanId = this.scan.id
-        // const UserId = this.user.id
-        if (this.scan.UserId && this.user.id) {
-          await ScanService.update(this.scan, {
-            ScanId: ScanId
+        const RoomId = this.room.id
+        const ScanId = this.room.ScanId
+
+        if (this.room.UserId && this.user.id) {
+          await RoomService.update(this.room, {
+            ScanId: ScanId,
+            RoomId: RoomId
           })
           this.$router.push({
             name: 'scan',
@@ -81,11 +85,18 @@ export default {
     },
     async destroy () {
       try {
-        const UserId = this.scan.UserId
-        const ScanId = this.scan.id
-        await ScanService.destroy({
+        const UserId = this.room.UserId
+        const ScanId = this.room.ScanId
+        const RoomId = this.room.id
+
+        console.log('ROOMID: ', RoomId)
+        console.log('ScanId: ', ScanId)
+        console.log('UserID: ', UserId)
+
+        await RoomService.destroy({
           UserId: UserId,
-          id: ScanId
+          ScanId: ScanId,
+          id: RoomId
         })
         this.$router.push({
           name: 'scan',
@@ -100,10 +111,10 @@ export default {
   },
   async mounted () {
     try {
-      const ScanId = this.$store.state.route.params.ScanId
+      const ScanId = this.route.params.ScanId
+      const RoomId = this.route.params.RoomId
       const UserId = this.user.id
-      this.scan = (await ScanService.getById(UserId, ScanId)).data
-      // console.log(song)
+      this.room = (await RoomService.getById(UserId, ScanId, RoomId)).data
     } catch (err) {
       console.log(err)
     }

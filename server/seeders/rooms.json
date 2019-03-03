@@ -1,0 +1,26 @@
+[
+  {
+    "room_name": "room1 for scan 1 and user 1",
+    "room_link": "https://example.com",
+    "UserId": "1",
+    "ScanId": "1"
+  },
+  {
+    "room_name": "room1 for scan 4 and user 1",
+    "room_link": "https://example.com",
+    "UserId": "1",
+    "ScanId": "4"
+  },
+  {
+    "room_name": "room2 for scan 4 and user 1",
+    "room_link": "https://example.com",
+    "UserId": "1",
+    "ScanId": "4"
+  },
+  {
+    "room_name": "room3 for scan 4 and user 1",
+    "room_link": "https://example.com",
+    "UserId": "1",
+    "ScanId": "4"
+  }
+]

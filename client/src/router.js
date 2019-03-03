@@ -6,6 +6,8 @@ import Login from './components/User/Login'
 import Scan from './components/Scan/Scan'
 import CreateScan from './components/Scan/CreateScan'
 import EditScan from './components/Scan/EditScan'
+import CreateRoom from './components/Room/CreateRoom'
+import EditRoom from './components/Room/EditRoom'
 
 Vue.use(Router)
 
@@ -47,6 +49,16 @@ export default new Router({
       path: '/:UserId/scans/:ScanId/edit',
       name: 'editscan',
       component: EditScan
+    },
+    {
+      path: '/:UserId/:ScanId/rooms/create',
+      name: 'createroom',
+      component: CreateRoom
+    },
+    {
+      path: '/:UserId/:ScanId/rooms/:RoomId',
+      name: 'editroom',
+      component: EditRoom
     }
   ]
 })

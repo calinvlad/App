@@ -1,4 +1,4 @@
-const {User, Scan} = require('../../models')
+const {User, Scan, Room} = require('../../models')
 const jwt = require('jsonwebtoken')
 const configuration = require('../../config/configuration')
 
