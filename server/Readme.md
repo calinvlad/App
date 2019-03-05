@@ -2,17 +2,11 @@
 Additional make a reset password with a token request and nodemailer
 /:token/reset
 
-# Asociate scan with User
-Done
-# Get User with Scan[]
-Done
-# Create Scan with UserId
-Done
-# Find the User's Scan / Scans
-Done
+### NOTE: I can't destroy a scan with rooms. But I can destroy it without. Repair that || Make it a future!
 
-# Create Room Model
-# Create Room asociations with Scan
-# Create Room's Routes
+///////////////////////////////////////////////////////////////////////////////////////
 
-### NOTE: I can't destroy a scan with rooms. Repair that.
+## Basic Usage
+# In this state, a user can do wathever he wants with he's scan and with his scan's rooms.
+
+# On every post, put, delete, get the user from store.user.id

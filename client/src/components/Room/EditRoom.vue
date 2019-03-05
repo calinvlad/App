@@ -63,9 +63,11 @@ export default {
       }
       try {
         const RoomId = this.room.id
+        const RoomUserId = this.room.UserId
         const ScanId = this.room.ScanId
+        const UserId = this.user.id
 
-        if (this.room.UserId && this.user.id) {
+        if (RoomUserId && UserId) {
           await RoomService.update(this.room, {
             ScanId: ScanId,
             RoomId: RoomId
@@ -73,7 +75,7 @@ export default {
           this.$router.push({
             name: 'scan',
             params: {
-              UserId: this.user.id
+              UserId: UserId
             }
           })
         } else {
@@ -85,13 +87,9 @@ export default {
     },
     async destroy () {
       try {
-        const UserId = this.room.UserId
+        const UserId = this.user.id
         const ScanId = this.room.ScanId
         const RoomId = this.room.id
-
-        console.log('ROOMID: ', RoomId)
-        console.log('ScanId: ', ScanId)
-        console.log('UserID: ', UserId)
 
         await RoomService.destroy({
           UserId: UserId,
@@ -101,7 +99,7 @@ export default {
         this.$router.push({
           name: 'scan',
           params: {
-            UserId: this.user.id
+            UserId: UserId
           }
         })
       } catch (error) {

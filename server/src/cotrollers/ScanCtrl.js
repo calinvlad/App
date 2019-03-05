@@ -59,7 +59,7 @@ module.exports = {
   },
   async post(req, res) {
     try {
-      const UserId = req.params.UserId
+      const UserId = req.user.id
       const ScanName = req.body.scan_name
       const ScanLink = req.body.scan_link
       const scan = await Scan.create({
@@ -77,7 +77,7 @@ module.exports = {
   },
   async update(req, res) {
     try {
-      const UserId = req.params.UserId
+      const UserId = req.user.id
       const ScanId = req.params.ScanId
       await Scan.update(req.body, {
         where: {
@@ -95,7 +95,7 @@ module.exports = {
   },
   async delete (req, res) {
     try {
-      const UserId = req.params.UserId
+      const UserId = req.user.id
       const ScanId = req.params.ScanId
       console.log('USERID: ', UserId)
       console.log('ScanId: ', ScanId)
@@ -117,7 +117,8 @@ module.exports = {
     }
     catch(error) {
       res.status(400).send({
-        error: 'Something went wrong while deleting the scan.'
+        error: `Something went wrong while deleting the scan.
+                Make sure you don't have any Rooms left.`
       })
     }
   }

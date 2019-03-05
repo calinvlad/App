@@ -61,7 +61,7 @@ export default {
       }
       try {
         const ScanId = this.scan.id
-        // const UserId = this.user.id
+        const UserId = this.user.id
         if (this.scan.UserId && this.user.id) {
           await ScanService.update(this.scan, {
             ScanId: ScanId
@@ -69,7 +69,7 @@ export default {
           this.$router.push({
             name: 'scan',
             params: {
-              UserId: this.user.id
+              UserId: UserId
             }
           })
         } else {
@@ -81,7 +81,7 @@ export default {
     },
     async destroy () {
       try {
-        const UserId = this.scan.UserId
+        const UserId = this.user.id
         const ScanId = this.scan.id
         await ScanService.destroy({
           UserId: UserId,
@@ -90,7 +90,7 @@ export default {
         this.$router.push({
           name: 'scan',
           params: {
-            UserId: this.user.id
+            UserId: UserId
           }
         })
       } catch (error) {

@@ -15,3 +15,16 @@ Done
 ### Edit Scan
 # Get User's scan
 # Edit User's scan
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+### Public Routes:
+## Note: UserId is from route params
+
+# /login
+# /register
+# /UserId/properties
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+# On every post, put, delete, get the user from store.user.id. Check if the store.user.id === route.params.id.

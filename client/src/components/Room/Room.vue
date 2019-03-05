@@ -1,5 +1,6 @@
 <template>
   <div class="indigo lighten-5 pt-3 pb-3">
+    <h1>Rooms</h1>
     <v-btn
     class="orange"
     v-if="isUserLoggedIn && user.id == $route.params.UserId"

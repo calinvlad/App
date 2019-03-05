@@ -50,8 +50,7 @@ export default {
       try {
         const UserId = this.user.id
         const ScanId = this.route.params.ScanId
-        console.log('USERID: ', UserId)
-        console.log('SCANID: ', ScanId)
+
         this.room = (await RoomService.post({
           UserId: UserId,
           ScanId: ScanId,

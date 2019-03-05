@@ -8,6 +8,7 @@ import CreateScan from './components/Scan/CreateScan'
 import EditScan from './components/Scan/EditScan'
 import CreateRoom from './components/Room/CreateRoom'
 import EditRoom from './components/Room/EditRoom'
+import store from './store'
 
 Vue.use(Router)
 
@@ -36,29 +37,61 @@ export default new Router({
       component: Login
     },
     {
-      path: '/:UserId/scans',
+      path: '/:UserId/properties',
       name: 'scan',
       component: Scan
     },
     {
-      path: '/:UserId/scans/create',
+      path: '/:UserId/properties/create',
       name: 'createscan',
-      component: CreateScan
+      component: CreateScan,
+      beforeEnter: (to, from, next) => {
+        const isUserLoggedIn = store.state.isUserLoggedIn
+        if (isUserLoggedIn) {
+          next()
+        } else {
+          next({ name: 'login' })
+        }
+      }
     },
     {
-      path: '/:UserId/scans/:ScanId/edit',
+      path: '/:UserId/properties/:ScanId/edit',
       name: 'editscan',
-      component: EditScan
+      component: EditScan,
+      beforeEnter: (to, from, next) => {
+        const isUserLoggedIn = store.state.isUserLoggedIn
+        if (isUserLoggedIn) {
+          next()
+        } else {
+          next({ name: 'login' })
+        }
+      }
     },
     {
       path: '/:UserId/:ScanId/rooms/create',
       name: 'createroom',
-      component: CreateRoom
+      component: CreateRoom,
+      beforeEnter: (to, from, next) => {
+        const isUserLoggedIn = store.state.isUserLoggedIn
+        if (isUserLoggedIn) {
+          next()
+        } else {
+          next({ name: 'login' })
+        }
+      }
     },
     {
       path: '/:UserId/:ScanId/rooms/:RoomId',
       name: 'editroom',
-      component: EditRoom
+      component: EditRoom,
+      beforeEnter: (to, from, next) => {
+        const isUserLoggedIn = store.state.isUserLoggedIn
+        if (isUserLoggedIn) {
+          next()
+        } else {
+          next({ name: 'login' })
+        }
+      }
     }
   ]
 })

@@ -39,7 +39,7 @@ module.exports = {
   },
   async post(req, res) {
     try {
-      const UserId = req.params.UserId
+      const UserId = req.user.id
       const ScanId = req.params.ScanId
       const RoomName = req.body.room_name
       const RoomLink = req.body.room_link
@@ -79,7 +79,7 @@ module.exports = {
   },
   async update(req, res) {
     try {
-      const UserId = req.params.UserId
+      const UserId = req.user.id
       const ScanId = req.params.ScanId
       const RoomId = req.params.RoomId
 
@@ -100,7 +100,7 @@ module.exports = {
   },
   async delete (req, res) {
     try {
-      const UserId = req.params.UserId
+      const UserId = req.user.id
       const ScanId = req.params.ScanId
       const RoomId = req.params.RoomId
       console.log('ROOMID: ', RoomId)
