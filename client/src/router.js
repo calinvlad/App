@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Register from './components/User/Register'
 import Login from './components/User/Login'
+import Forgot from './components/User/Forgot'
+import Reset from './components/User/Reset'
 import Scan from './components/Scan/Scan'
 import CreateScan from './components/Scan/CreateScan'
 import EditScan from './components/Scan/EditScan'
@@ -35,6 +37,16 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/forgot',
+      name: 'forgot',
+      component: Forgot
+    },
+    {
+      path: '/reset/:Token',
+      name: 'reset',
+      component: Reset
     },
     {
       path: '/:UserId/properties',

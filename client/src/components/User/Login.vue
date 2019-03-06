@@ -15,6 +15,7 @@
         ></v-text-field>
         <div class="danger-alert mb-3" v-html="error"></div>
         <v-btn @click="login">submit</v-btn>
+        <v-btn :to="{name: 'forgot'}">Forgot Password?</v-btn>
       </form>
     </v-flex>
   </v-layout>

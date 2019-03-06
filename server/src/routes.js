@@ -1,4 +1,5 @@
 const AuthCtrl = require('./cotrollers/AuthCtrl')
+const AuthResetCtrl = require('./cotrollers/AuthResetCtrl')
 const AuthCtrlPolicy = require('./policies/AuthCtrlPolicy')
 const ScanCtrl = require('./cotrollers/ScanCtrl')
 const RoomCtrl = require('./cotrollers/RoomCtrl')
@@ -10,6 +11,9 @@ module.exports = (app) => {
   app.get('/users', AuthCtrl.index)
   app.post('/register', AuthCtrlPolicy.register, AuthCtrl.register)
   app.post('/login', AuthCtrl.login)
+  app.post('/forgot', AuthResetCtrl.forgot)
+  app.get('/reset/:Token', AuthResetCtrl.getUserData)
+  app.put('/reset/:Token', AuthResetCtrl.reset)
 
   // Scans
   app.get('/scans', ScanCtrl.index)

@@ -103,9 +103,6 @@ module.exports = {
       const UserId = req.user.id
       const ScanId = req.params.ScanId
       const RoomId = req.params.RoomId
-      console.log('ROOMID: ', RoomId)
-      console.log('ScanId: ', ScanId)
-      console.log('UserID: ', UserId)
 
       const room = await Room.findOne({
         where: {
