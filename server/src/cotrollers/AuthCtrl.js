@@ -1,7 +1,6 @@
 const {User, Scan, Room} = require('../../models')
 const jwt = require('jsonwebtoken')
 const configuration = require('../../config/configuration')
-const nodemailer = require("nodemailer");
 
 function jwtSignUser (user) {
   const ONE_WEEK = 60 * 60 * 24 * 7
@@ -15,7 +14,10 @@ module.exports = {
     try {
       const users = await User.findAll({
         include: [{
-          model: Scan
+          model: Scan,
+          include: [{
+            model: Room
+          }]
         }]
       })
       res.send(users)
@@ -28,9 +30,13 @@ module.exports = {
   },
   async register (req, res) {
     try {
-      // console.log(`USER NAME: ${req.body.company_name}, USER PARRWORD: ${req.body.password}`)
-      const user = await User.create(req.body)
-      // console.log(`USER NAME: ${user.company_name}, USER PARRWORD: ${user.password}`)
+      // const user = await User.create(req.body)
+      const user = await User.create({
+        company_name: req.body.company_name,
+        email: req.body.email,
+        password: req.body.password,
+        Role: 'Author'
+      })
       res.send(user.toJSON())
     }
     catch(err) {

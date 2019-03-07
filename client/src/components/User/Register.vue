@@ -1,4 +1,3 @@
-
 <template>
   <v-layout mt-5>
     <v-flex xs-6 offset-xs3>

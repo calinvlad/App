@@ -10,6 +10,9 @@ import CreateScan from './components/Scan/CreateScan'
 import EditScan from './components/Scan/EditScan'
 import CreateRoom from './components/Room/CreateRoom'
 import EditRoom from './components/Room/EditRoom'
+
+import Companies from './components/Admin/Users'
+
 import store from './store'
 
 Vue.use(Router)
@@ -99,6 +102,19 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         const isUserLoggedIn = store.state.isUserLoggedIn
         if (isUserLoggedIn) {
+          next()
+        } else {
+          next({ name: 'login' })
+        }
+      }
+    },
+    {
+      path: '/admin/companies',
+      name: 'companies',
+      component: Companies,
+      beforeEnter: (to, from, next) => {
+        const isAdmin = store.state.isAdmin
+        if (isAdmin) {
           next()
         } else {
           next({ name: 'login' })

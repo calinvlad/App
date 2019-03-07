@@ -23,6 +23,7 @@
 
 <script>
 import AuthService from '@/services/AuthService'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -30,6 +31,11 @@ export default {
       password: '',
       error: null
     }
+  },
+  computed: {
+    ...mapState([
+      'isAdmin'
+    ])
   },
   methods: {
     async login () {
@@ -40,10 +46,16 @@ export default {
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
-        this.$router.push({
-          name: 'scan',
-          params: { UserId: this.$store.state.user.id }
-        })
+        if (this.isAdmin) {
+          this.$router.push({
+            name: 'companies'
+          })
+        } else {
+          this.$router.push({
+            name: 'scan',
+            params: { UserId: this.$store.state.user.id }
+          })
+        }
       } catch (error) {
         this.error = error.response.data.error
       }

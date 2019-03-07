@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
+    Role: {
+      type: DataTypes.STRING
+    },
     password: DataTypes.STRING
   }, {
     hooks: {
