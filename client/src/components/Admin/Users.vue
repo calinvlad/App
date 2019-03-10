@@ -3,8 +3,20 @@
 </template>
 
 <script>
-export default {
+import store from '@/store'
+import { mapState } from 'vuex'
 
+export default {
+  beforeRouteEnter: (to, from, next) => {
+    if (store.state.isAdmin) {
+      next()
+    } else {
+      next({ name: 'notfound' })
+    }
+  },
+  computed: {
+    ...mapState(['isAdmin'])
+  }
 }
 </script>
 

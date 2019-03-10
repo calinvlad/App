@@ -11,9 +11,9 @@ import EditScan from './components/Scan/EditScan'
 import CreateRoom from './components/Room/CreateRoom'
 import EditRoom from './components/Room/EditRoom'
 
-import Companies from './components/Admin/Users'
+import NotFound from './views/404/NotFound'
 
-import store from './store'
+import Companies from './components/Admin/Users'
 
 Vue.use(Router)
 
@@ -21,105 +21,18 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/forgot',
-      name: 'forgot',
-      component: Forgot
-    },
-    {
-      path: '/reset/:Token',
-      name: 'reset',
-      component: Reset
-    },
-    {
-      path: '/:UserId/properties',
-      name: 'scan',
-      component: Scan
-    },
-    {
-      path: '/:UserId/properties/create',
-      name: 'createscan',
-      component: CreateScan,
-      beforeEnter: (to, from, next) => {
-        const isUserLoggedIn = store.state.isUserLoggedIn
-        if (isUserLoggedIn) {
-          next()
-        } else {
-          next({ name: 'login' })
-        }
-      }
-    },
-    {
-      path: '/:UserId/properties/:ScanId/edit',
-      name: 'editscan',
-      component: EditScan,
-      beforeEnter: (to, from, next) => {
-        const isUserLoggedIn = store.state.isUserLoggedIn
-        if (isUserLoggedIn) {
-          next()
-        } else {
-          next({ name: 'login' })
-        }
-      }
-    },
-    {
-      path: '/:UserId/:ScanId/rooms/create',
-      name: 'createroom',
-      component: CreateRoom,
-      beforeEnter: (to, from, next) => {
-        const isUserLoggedIn = store.state.isUserLoggedIn
-        if (isUserLoggedIn) {
-          next()
-        } else {
-          next({ name: 'login' })
-        }
-      }
-    },
-    {
-      path: '/:UserId/:ScanId/rooms/:RoomId',
-      name: 'editroom',
-      component: EditRoom,
-      beforeEnter: (to, from, next) => {
-        const isUserLoggedIn = store.state.isUserLoggedIn
-        if (isUserLoggedIn) {
-          next()
-        } else {
-          next({ name: 'login' })
-        }
-      }
-    },
-    {
-      path: '/admin/companies',
-      name: 'companies',
-      component: Companies,
-      beforeEnter: (to, from, next) => {
-        const isAdmin = store.state.isAdmin
-        if (isAdmin) {
-          next()
-        } else {
-          next({ name: 'login' })
-        }
-      }
-    }
+    { path: '/404', name: 'notfound', component: NotFound },
+    { path: '*', redirect: '/404' },
+    { path: '/', name: 'home', component: Home },
+    { path: '/register', name: 'register', component: Register },
+    { path: '/login', name: 'login', component: Login },
+    { path: '/forgot', name: 'forgot', component: Forgot },
+    { path: '/reset/:Token', name: 'reset', component: Reset },
+    { path: '/:UserId/properties', name: 'scan', component: Scan },
+    { path: '/:UserId/properties/create', name: 'createscan', component: CreateScan },
+    { path: '/:UserId/properties/:ScanId/edit', name: 'editscan', component: EditScan },
+    { path: '/:UserId/:ScanId/rooms/create', name: 'createroom', component: CreateRoom },
+    { path: '/:UserId/:ScanId/rooms/:RoomId', name: 'editroom', component: EditRoom },
+    { path: '/admin/companies', name: 'companies', component: Companies }
   ]
 })

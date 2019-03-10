@@ -27,10 +27,18 @@
 </template>
 
 <script>
+import store from '@/store'
 import { mapState } from 'vuex'
 import ScanService from '@/services/ScanService'
 
 export default {
+  beforeRouteEnter: (to, from, next) => {
+    if (!store.state.isUserLoggedIn) {
+      next({ name: 'notfound' })
+    } else {
+      next()
+    }
+  },
   data () {
     return {
       scan: {
@@ -103,6 +111,14 @@ export default {
       const ScanId = this.$store.state.route.params.ScanId
       const UserId = this.user.id
       this.scan = (await ScanService.getById(UserId, ScanId)).data
+      // console.log(this.scan)
+      // if (this.scan.id === undefined) {
+      //   this.$router.push({
+      //     path: '*'
+      //   })
+      // } else {
+      //   console.log('Do nothing')
+      // }
       // console.log(song)
     } catch (err) {
       console.log(err)

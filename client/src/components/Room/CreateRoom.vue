@@ -22,10 +22,19 @@
 </template>
 
 <script>
+import store from '@/store'
 import { mapState } from 'vuex'
 import RoomService from '@/services/RoomService'
 
 export default {
+  beforeRouteEnter: (to, from, next) => {
+    const isUserLoggedIn = store.state.isUserLoggedIn
+    if (isUserLoggedIn) {
+      next()
+    } else {
+      next({ name: 'notfound' })
+    }
+  },
   data () {
     return {
       room: {

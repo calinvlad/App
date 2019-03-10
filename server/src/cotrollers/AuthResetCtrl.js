@@ -64,9 +64,6 @@ module.exports = {
       const token = req.params.Token
       const Now = Date.now() / 1000
       var decoded = jwt.decode(token, {complete: true})
-      // console.log('DATE NOW: ', Now)
-      // console.log('DATE THEN: ', decoded.payload.exp)
-      // console.log(Now > decoded.payload.exp)
       if(Now > decoded.payload.exp) {
         res.status(500).send({
           error: 'Your link is not valid'

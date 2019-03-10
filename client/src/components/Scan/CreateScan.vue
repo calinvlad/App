@@ -1,6 +1,7 @@
 <template>
   <v-layout>
     <v-flex xs6 offset-xs3>
+      <v-toolbar-title>Create Property</v-toolbar-title>
         <v-text-field
         label="Scan Name*"
         :rules="[rules.required]"
@@ -24,8 +25,22 @@
 <script>
 import { mapState } from 'vuex'
 import ScanService from '@/services/ScanService'
+import store from '@/store'
 
 export default {
+  beforeRouteEnter: (to, from, next) => {
+    const RouteId = store.state.route.params.UserId
+    if (store.state.isUserLoggedIn) {
+      const UserId = store.state.user.id
+      if (UserId === RouteId) {
+        next()
+      } else {
+        next({ name: 'notfound' })
+      }
+    } else {
+      next({ name: 'notfound' })
+    }
+  },
   data () {
     return {
       scan: {

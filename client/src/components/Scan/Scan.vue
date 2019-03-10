@@ -59,8 +59,14 @@ export default {
     this.getData()
   },
   methods: {
+    beforeEnter: (to, from, next) => {
+      if (this.scans[0] === undefined && !this.isUserLoggedIn) {
+        next({ name: 'notfound' })
+      } else {
+        next()
+      }
+    },
     async getData () {
-      // Get the user data from the router's :UserId
       this.UserId = this.$route.params.UserId
       this.scans = (await ScanService.show(this.UserId)).data
     }
