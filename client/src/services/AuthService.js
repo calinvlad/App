@@ -1,6 +1,12 @@
 import Api from '@/services/Api'
 
 export default {
+  index () {
+    return Api().get('users')
+  },
+  getById (CompanyName) {
+    return Api().get(`/users/${CompanyName}`)
+  },
   register (credentials) {
     return Api().post('register', credentials)
   },

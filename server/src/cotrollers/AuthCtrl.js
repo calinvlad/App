@@ -10,24 +10,6 @@ function jwtSignUser (user) {
 }
 
 module.exports = {
-  async index(req, res) {
-    try {
-      const users = await User.findAll({
-        include: [{
-          model: Scan,
-          include: [{
-            model: Room
-          }]
-        }]
-      })
-      res.send(users)
-    }
-    catch(error) {
-      res.statut(400).send({
-        error: 'Something is wrong with the server. If the problem persists, contact us.'
-      })
-    }
-  },
   async register (req, res) {
     try {
       // const user = await User.create(req.body)

@@ -13,7 +13,8 @@ import EditRoom from './components/Room/EditRoom'
 
 import NotFound from './views/404/NotFound'
 
-import Companies from './components/Admin/Users'
+import Companies from './components/Admin/Companies'
+import Company from './components/Admin/Company'
 
 Vue.use(Router)
 
@@ -33,6 +34,8 @@ export default new Router({
     { path: '/:UserId/properties/:ScanId/edit', name: 'editscan', component: EditScan },
     { path: '/:UserId/:ScanId/rooms/create', name: 'createroom', component: CreateRoom },
     { path: '/:UserId/:ScanId/rooms/:RoomId', name: 'editroom', component: EditRoom },
-    { path: '/admin/companies', name: 'companies', component: Companies }
+    { path: '/admin/companies', name: 'companies', component: Companies },
+    { path: '/admin/companies/:company_name', name: 'company', component: Company }
+
   ]
 })

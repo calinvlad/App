@@ -1,3 +1,4 @@
+const AdminCtrl = require('./cotrollers/AdminCtrl')
 const AuthCtrl = require('./cotrollers/AuthCtrl')
 const AuthResetCtrl = require('./cotrollers/AuthResetCtrl')
 const AuthCtrlPolicy = require('./policies/AuthCtrlPolicy')
@@ -7,8 +8,16 @@ const RoomCtrl = require('./cotrollers/RoomCtrl')
 const isAuthenticated = require('./policies/isAuthenticated')
 
 module.exports = (app) => {
+  // Admin
+  app.get('/admin/companies', AdminCtrl.index)
+  app.get('/admin/companies/:company_name', AdminCtrl.getByName)
+  app.get('/admin/companies/:company_name/scans', AdminCtrl.getCompanyScans)
+  app.post('/admin/companies/:company_name/scans', AdminCtrl.createCompanyScan)
+  app.put('/admin/companies/:company_name/scans/:scan_id', AdminCtrl.editCompanyScan)
+  app.delete('/admin/companies/:company_name/scans/:scan_id', AdminCtrl.deleteCompanyScan)
   // User
-  app.get('/users', AuthCtrl.index)
+  // app.get('/users', AuthCtrl.index)
+  // app.get('/users/:company_name', AuthCtrl.getById)
   app.post('/register', AuthCtrlPolicy.register, AuthCtrl.register)
   app.post('/login', AuthCtrl.login)
   app.post('/forgot', AuthResetCtrl.forgot)
