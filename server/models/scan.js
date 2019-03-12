@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Scan = sequelize.define('Scan', {
-    scan_name: DataTypes.STRING,
-    scan_link: DataTypes.STRING
+    scan_name: { type: DataTypes.STRING, notEmpty: true },
+    scan_link: { type: DataTypes.STRING, notEmpty: true, isUrl: true }
   }, {});
   Scan.associate = function(models) {
     Scan.belongsTo(models.User, {

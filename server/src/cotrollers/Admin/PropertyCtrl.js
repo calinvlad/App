@@ -1,33 +1,7 @@
-const {User, Scan, Room} = require('../../models')
+const {User, Scan, Room} = require('../../../models')
 
 module.exports = {
-  async index(req, res) {
-    try {
-      const users = await User.findAll()
-      res.send(users)
-    }
-    catch(error) {
-      res.statut(400).send({
-        error: 'Something is wrong with the server. If the problem persists, contact us.'
-      })
-    }
-  },
-  async getByName(req, res) {
-    try {
-      const CompanyName = req.params.company_name
-      const users = await User.findOne({
-        where: {
-          company_name: CompanyName
-        }
-      })
-      res.send(users)
-    }
-    catch(error) {
-      res.statut(400).send({
-        error: 'Something is wrong with the server. If the problem persists, contact us.'
-      })
-    }
-  },
+  // FIND THE COMPANY'S Properties
   async getCompanyScans (req, res) {
     try {
       const Company = await User.findOne({
@@ -40,7 +14,10 @@ module.exports = {
         const Scans = await Scan.findAll({
           where: {
             UserId: CompanyId
-          }
+          },
+          include: [{
+            model: Room
+          }]
         })
         res.send(Scans)
       }
@@ -56,6 +33,7 @@ module.exports = {
       })
     }
   },
+  // CREATE A PROPERTY FOR THE COMPANY
   async createCompanyScan (req, res) {
     try {
       const Company = await User.findOne({
@@ -83,6 +61,7 @@ module.exports = {
       })
     }
   },
+  // EDIT THE COMPANY'S SCAN 
   async editCompanyScan (req, res) {
     try {
       const Company = await User.findOne({
@@ -119,6 +98,7 @@ module.exports = {
       })
     }
   },
+  // DELETE THE COMPANY'S SCAN
   async deleteCompanyScan (req, res) {
     try {
       const Company = await User.findOne({

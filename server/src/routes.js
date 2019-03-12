@@ -1,4 +1,9 @@
-const AdminCtrl = require('./cotrollers/AdminCtrl')
+// ADMINISTRATOR
+const CompanyCtrl = require('./cotrollers/Admin/CompanyCtrl')
+const PropertyCtrl = require('./cotrollers/Admin/PropertyCtrl')
+const PropertyRoomCtrl = require('./cotrollers/Admin/PropertyRoomCtrl')
+
+// PUBLIC
 const AuthCtrl = require('./cotrollers/AuthCtrl')
 const AuthResetCtrl = require('./cotrollers/AuthResetCtrl')
 const AuthCtrlPolicy = require('./policies/AuthCtrlPolicy')
@@ -9,12 +14,18 @@ const isAuthenticated = require('./policies/isAuthenticated')
 
 module.exports = (app) => {
   // Admin
-  app.get('/admin/companies', AdminCtrl.index)
-  app.get('/admin/companies/:company_name', AdminCtrl.getByName)
-  app.get('/admin/companies/:company_name/scans', AdminCtrl.getCompanyScans)
-  app.post('/admin/companies/:company_name/scans', AdminCtrl.createCompanyScan)
-  app.put('/admin/companies/:company_name/scans/:scan_id', AdminCtrl.editCompanyScan)
-  app.delete('/admin/companies/:company_name/scans/:scan_id', AdminCtrl.deleteCompanyScan)
+  app.get('/admin/companies', CompanyCtrl.index)
+  app.get('/admin/companies/:company_name', CompanyCtrl.getByName)
+  app.get('/admin/companies/:company_name/scans', PropertyCtrl.getCompanyScans)
+  app.post('/admin/companies/:company_name/scans', PropertyCtrl.createCompanyScan)
+  app.put('/admin/companies/:company_name/scans/:scan_id', PropertyCtrl.editCompanyScan)
+  app.delete('/admin/companies/:company_name/scans/:scan_id', PropertyCtrl.deleteCompanyScan)
+  
+  app.get('/admin/companies/:company_name/scans/:property_name', PropertyRoomCtrl.getPropertyByName)
+  app.post('/admin/companies/:company_name/scans/:property_name', PropertyRoomCtrl.createPropertyRoom)
+  app.put('/admin/companies/:company_name/scans/:property_name/:room_id', PropertyRoomCtrl.editPropertyRoom)
+  app.delete('/admin/companies/:company_name/scans/:property_name/:room_id', PropertyRoomCtrl.deletePropertyRoom)
+
   // User
   // app.get('/users', AuthCtrl.index)
   // app.get('/users/:company_name', AuthCtrl.getById)

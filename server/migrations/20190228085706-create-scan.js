@@ -9,10 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       scan_name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        notEmpty: true
       },
       scan_link: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        notEmpty: true,
+        isUrl: true
       },
       createdAt: {
         allowNull: false,
